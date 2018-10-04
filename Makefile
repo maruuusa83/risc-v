@@ -11,7 +11,7 @@ BIN_DIR=$(PROJECT_ROOT)/bin
 TEST_DIR=$(PROJECT_ROOT)/test
 
 SRC_DIR=$(PROJECT_ROOT)/src
-SRC=riscv.v lib/gpregs.v
+SRC=riscv.v lib/gpregs.v lib/alu.v
 
 export PROJECT_ROOT
 export BIN_DIR

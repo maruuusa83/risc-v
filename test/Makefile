@@ -4,7 +4,7 @@
 # https://github.com/maruuusa83/risc-v/blob/master/LICENSE
 #
 
-TEST_NAME=tb_riscv.v lib/tb_gpregs.v
+TEST_NAME=tb_riscv.v lib/tb_gpregs.v lib/tb_alu.v
 
 TEST_DIR=$(PROJECT_ROOT)/test
 TEST_EXECUTABLE=$(TEST_NAME:.v=.o)
@@ -22,7 +22,7 @@ all: $(TEST_EXECUTABLE)
 
 tb_riscv.o: $(addprefix $(SRC_DIR)/, $(SRC))
 lib/tb_gpregs.o: $(SRC_DIR)/lib/gpregs.v
-
+lib/tb_alu.o: $(SRC_DIR)/lib/alu.v
 
 .PHONY: clean
 clean:
