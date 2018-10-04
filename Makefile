@@ -16,16 +16,11 @@ export BIN_DIR
 .PHONY: all
 all: test
 
-.PHONY: bindir
-bindir:
-	@if [ ! -d $(BIN_DIR) ]; \
-		then echo "mkdir -p $(BIN_DIR)"; mkdir -p $(BIN_DIR); \
-		fi
-
 .PHONY: test
-test: bindir
+test:
 	$(MAKE) -C $(TEST_DIR)
 
 .PHONY: clean
 clean:
 	$(RM) -r $(BIN_DIR)
+	$(MAKE) -C $(TEST_DIR) clean
