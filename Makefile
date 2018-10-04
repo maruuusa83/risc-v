@@ -10,8 +10,13 @@ PROJECT_ROOT=$(PWD)
 BIN_DIR=$(PROJECT_ROOT)/bin
 TEST_DIR=$(PROJECT_ROOT)/test
 
+SRC_DIR=$(PROJECT_ROOT)/src
+SRC=riscv.v lib/gpregs.v
+
 export PROJECT_ROOT
 export BIN_DIR
+export SRC
+export SRC_DIR
 
 .PHONY: all
 all: test

@@ -7,11 +7,7 @@
 TEST_NAME=tb_riscv.v lib/tb_gpregs.v
 
 TEST_DIR=$(PROJECT_ROOT)/test
-# TEST_EXECUTABLE=$(addprefix $(BIN_DIR)/, $(TEST_NAME:.v=.o))
 TEST_EXECUTABLE=$(TEST_NAME:.v=.o)
-
-SRC_DIR=$(PROJECT_ROOT)/src
-SRC=riscv.v lib/gpregs.v
 
 IV=iverilog
 IVFLAGS=-g2005-sv -DDEBUG
@@ -23,6 +19,10 @@ all: $(TEST_EXECUTABLE)
 
 .v.o:
 	$(IV) $(IVFLAGS) -o $@  $< $(addprefix $(SRC_DIR)/, $(SRC))
+
+tb_riscv.o: $(addprefix $(SRC_DIR)/, $(SRC))
+lib/tb_gpregs.o: $(SRC_DIR)/lib/gpregs.v
+
 
 .PHONY: clean
 clean:
