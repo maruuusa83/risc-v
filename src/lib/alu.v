@@ -19,7 +19,7 @@ module ALU
   output reg signed [REG_DATA_WIDTH - 1:0] result
 );
 
-  localparam CTRL_WIDTH = 3;
+  localparam CTRL_WIDTH = 4;
 
   wire unsigned [REG_DATA_WIDTH - 1:0] din_u_0;
   wire unsigned [REG_DATA_WIDTH - 1:0] din_u_1;
@@ -30,12 +30,15 @@ module ALU
   always @(posedge clk or negedge nreset) begin
     if (nreset != 1'b0) begin
       case (ctrl)
-        3'b000: result = din_0 + din_1; // ADD
-	3'b010: result = (din_0 < din_1); // SLT
-	3'b011: result = ({1'b0, din_0} < {1'b0, din_1}); // SLTU (din_x will be unsigned)
-	3'b100: result = din_0 ^ din_1; // XOR
-	3'b110: result = din_0 | din_1; // OR
-	3'b111: result = din_0 & din_1; // AND
+        4'b0000: result = din_0 + din_1; // ADD
+	4'b0001: result = din_0 << din_1; // SLL
+	4'b0010: result = (din_0 < din_1); // SLT
+	4'b0011: result = ({1'b0, din_0} < {1'b0, din_1}); // SLTU (din_x will be unsigned)
+	4'b0100: result = din_0 ^ din_1; // XOR
+	4'b0101: result = din_0 >> din_1; // SRL
+	4'b1101: result = din_0 >>> din_1; // SRA
+	4'b0110: result = din_0 | din_1; // OR
+	4'b0111: result = din_0 & din_1; // AND
       endcase
     end
     else begin
