@@ -14,6 +14,7 @@ SRC_DIR=$(PROJECT_ROOT)/src
 SRC=riscv.v lib/gpregs.v
 
 IV=iverilog
+IVFLAGS=-g2005-sv -DDEBUG
 
 .SUFFIXES: .o .v
 
@@ -21,7 +22,7 @@ IV=iverilog
 all: $(TEST_EXECUTABLE)
 
 .v.o:
-	$(IV) -o $@  $< $(addprefix $(SRC_DIR)/, $(SRC))
+	$(IV) $(IVFLAGS) -o $@  $< $(addprefix $(SRC_DIR)/, $(SRC))
 
 .PHONY: clean
 clean:
