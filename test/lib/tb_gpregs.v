@@ -29,43 +29,47 @@ module tb_gpregs();
     clk <= !clk;
   end
 
-  initial begin
+  `TESTARRAY(tb_gpregs);
     nreset <= 1'b0;
     #(CLK_PERIOD)
     nreset <= 1'b1;
     #(CLK_PERIOD)
 
-    read_reg_0 <= 5'd0;
-    read_reg_1 <= 5'd0;
-    write_reg  <= 1'b0;
-    din        <= 32'h0;
-    din_enable <= 1'b0;
+    `TEST(read_x0);
+      read_reg_0 <= 5'd0;
+      read_reg_1 <= 5'd0;
+      write_reg  <= 1'b0;
+      din        <= 32'h0;
+      din_enable <= 1'b0;
 
-    #(CLK_PERIOD)
+      #(CLK_PERIOD)
 
-    `ASSERT_EQ(32'd0, dout_reg_0);
-    `ASSERT_EQ(32'd0, dout_reg_1);
+      `ASSERT_EQ(32'd0, dout_reg_0);
+      `ASSERT_EQ(32'd0, dout_reg_1);
+    `ENDTEST;
 
-    write_reg <= 1'b0;
-    din       <= 32'hFF;
+    `TEST(write_x0);
+      write_reg <= 1'b0;
+      din       <= 32'hFF;
 
-    #(CLK_PERIOD)
+      #(CLK_PERIOD)
 
-    `ASSERT_EQ(32'd0, dout_reg_0);
+      `ASSERT_EQ(32'd0, dout_reg_0);
+    `ENDTEST;
 
-    write_reg  <= 1'd1;
-    din        <= 32'h12;
-    read_reg_0 <= 1'd1;
-    din_enable <= 1'b1;
+    `TEST(write_and_read);
+      write_reg  <= 1'd1;
+      din        <= 32'h12;
+      read_reg_0 <= 1'd1;
+      din_enable <= 1'b1;
 
-    #(CLK_PERIOD)
+      #(CLK_PERIOD)
 
-    din_enable <= 1'b0;
+      din_enable <= 1'b0;
 
-    `ASSERT_EQ(32'h12, dout_reg_0);
+      `ASSERT_EQ(32'h12, dout_reg_0);
+    `ENDTEST;
+  `ENDTESTARRAY;
 
-    `FINISH_TEST();
-  end
-
-endmodule // test
+endmodule // tb_gpregs
 

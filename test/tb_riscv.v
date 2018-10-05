@@ -4,6 +4,10 @@
 // https://github.com/maruuusa83/risc-v/blob/master/LICENSE
 //
 
+`include "lib/utils.v"
+
+`timescale 1ns/1ps
+
 module test();
   parameter CLK_PERIOD = 10;
 
@@ -20,8 +24,8 @@ module test();
     clk <= !clk;
   end
 
-  initial begin
+  `TESTARRAY(tb_riscv);
     ncpurst = 1'b1;
-  end
+  `ENDTESTARRAY;
 
 endmodule // test
