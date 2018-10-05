@@ -31,8 +31,12 @@ module tb_controller();
     #(CLK_PERIOD)
     nreset <= 1'b1;
     #(CLK_PERIOD)
+
+    opcode <= 7'b0110011;
+
+    #(CLK_PERIOD)
     
-    `ASSERT_EQ(1'b0, 1'b0);
+    `ASSERT_EQ(2'b10, alu_op);
 
     `FINISH_TEST();
   end

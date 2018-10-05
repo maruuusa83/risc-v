@@ -20,6 +20,11 @@ module CONTROLLER
 
   always @(posedge clk or negedge nreset) begin
     if (nreset != 1'b0) begin
+      case (opcode)
+        7'b0110011: begin
+	  alu_op <= 2'b10;
+	end
+      endcase
     end
     else begin
       alu_op <= 2'd0;
