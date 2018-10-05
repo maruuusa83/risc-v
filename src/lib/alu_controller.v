@@ -12,15 +12,22 @@ module ALU_CONTROLLER
   input clk,
   input nreset,
 
-  input [6:0] opcode,
+  input [2:0] funct3,
+  input [6:0] funct7,
   input [1:0] alu_op,
   output reg [3:0] alu_ctrl
 );
 
   always @(posedge clk or negedge nreset) begin
     if (nreset != 1'b0) begin
+      case (alu_op)
+        2'b10: begin
+	  alu_ctrl <= {funct7[5], funct3};
+	end
+      endcase
     end
     else begin
+      alu_ctrl <= 4'd0;
     end
   end
 
