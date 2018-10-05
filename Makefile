@@ -26,6 +26,11 @@ all: test
 test:
 	$(MAKE) -C $(TEST_DIR)
 
+.PHONY: test_build
+run_test:
+	$(MAKE) -C $(TEST_DIR)
+	$(MAKE) -C $(TEST_DIR) run
+
 .PHONY: clean
 clean:
 	$(RM) -r $(BIN_DIR)
