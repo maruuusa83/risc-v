@@ -18,6 +18,10 @@ IVFLAGS=-g2005-sv -DDEBUG
 .PHONY: all
 all: $(TEST_EXECUTABLE)
 
+.PHONY: run
+run: $(TEST_EXECUTABLE)
+	$(foreach e, $(TEST_EXECUTABLE), $(e);)
+
 .v.o:
 	$(IV) $(IVFLAGS) -o $@  $< $(SRC)
 

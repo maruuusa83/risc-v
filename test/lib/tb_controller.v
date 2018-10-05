@@ -26,22 +26,20 @@ module tb_controller();
     clk <= !clk;
   end
 
-  initial begin
+  `TESTARRAY(alu_test);
     nreset <= 1'b0;
     #(CLK_PERIOD)
     nreset <= 1'b1;
     #(CLK_PERIOD)
 
-    opcode <= 7'b0110011;
+    `TEST(R_type);
+      opcode <= 7'b0110011;
 
-    #(CLK_PERIOD)
-    
-    `ASSERT_EQ(2'b10, alu_op);
+      #(CLK_PERIOD)
+      
+      `ASSERT_EQ(2'b10, alu_op);
+    `ENDTEST;
+  `ENDTESTARRAY;
 
-    `FINISH_TEST();
-  end
-
-endmodule // test
-
-
+endmodule // tb_controller
 

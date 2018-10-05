@@ -61,39 +61,39 @@ module tb_r_type();
     clk <= !clk;
   end
 
-  initial begin
+  `TESTARRAY(alu_test);
     nreset <= 1'b0;
     gpregs_din_enable <= 1'b0;
     #(CLK_PERIOD)
     nreset <= 1'b1;
     #(CLK_PERIOD)
 
-    // LOAD x1, 10
-    gpregs_din <= 32'd10;
-    gpregs_write_reg <= 5'd1;
-    gpregs_din_enable <= 1'b1;
-    #(CLK_PERIOD)
+    `TEST(add);
+      // LOAD x1, 10
+      gpregs_din <= 32'd10;
+      gpregs_write_reg <= 5'd1;
+      gpregs_din_enable <= 1'b1;
+      #(CLK_PERIOD)
 
-    // LOAD x2, 5
-    gpregs_din <= 32'd5;
-    gpregs_write_reg <= 5'd2;
-    gpregs_din_enable <= 1'b1;
-    #(CLK_PERIOD)
+      // LOAD x2, 5
+      gpregs_din <= 32'd5;
+      gpregs_write_reg <= 5'd2;
+      gpregs_din_enable <= 1'b1;
+      #(CLK_PERIOD)
 
-    // ADD x1, x2
-    instruction <= 32'b0000000_00010_00001_000_00001_0110011;
+      // ADD x1, x2
+      instruction <= 32'b0000000_00010_00001_000_00001_0110011;
 
-    $display(din_0, din_1, result);
-    #(CLK_PERIOD)
-    $display(din_0, din_1, result);
-    #(CLK_PERIOD)
-    $display(din_0, din_1, result);
-    #(CLK_PERIOD)
+      $display(din_0, din_1, result);
+      #(CLK_PERIOD)
+      $display(din_0, din_1, result);
+      #(CLK_PERIOD)
+      $display(din_0, din_1, result);
+      #(CLK_PERIOD)
 
-    `ASSERT_EQ(32'd15, result);
-
-    `FINISH_TEST();
-  end
+      `ASSERT_EQ(32'd15, result);
+    `ENDTEST;
+  `ENDTESTARRAY;
 
 endmodule // tb_r_type
 

@@ -26,7 +26,7 @@ module tb_alu_controller();
     clk <= !clk;
   end
 
-  initial begin
+  `TESTARRAY(tb_alu_controller);
     nreset <= 1'b0;
     #(CLK_PERIOD)
     nreset <= 1'b1;
@@ -34,36 +34,39 @@ module tb_alu_controller();
     
     //// Integer Register-Register Operations
     //// ALU_OP = 2'b10
-    // XOR
-    funct3 <= 3'b100;
-    funct7 <= 7'b0000000;
-    alu_op <= 2'b10;
+    `TEST(xor);
+      funct3 <= 3'b100;
+      funct7 <= 7'b0000000;
+      alu_op <= 2'b10;
 
-    #(CLK_PERIOD)
+      #(CLK_PERIOD)
 
-    `ASSERT_EQ(4'b0100, alu_ctrl);
+      `ASSERT_EQ(4'b0100, alu_ctrl);
+    `ENDTEST;
 
     // ADD
-    funct3 <= 3'b000;
-    funct7 <= 7'b0000000;
-    alu_op <= 2'b10;
+    `TEST(add);
+      funct3 <= 3'b000;
+      funct7 <= 7'b0000000;
+      alu_op <= 2'b10;
 
-    #(CLK_PERIOD)
+      #(CLK_PERIOD)
 
-    `ASSERT_EQ(4'b0000, alu_ctrl);
+      `ASSERT_EQ(4'b0000, alu_ctrl);
+    `ENDTEST;
     
     // SRA
-    funct3 <= 3'b101;
-    funct7 <= 7'b0100000;
-    alu_op <= 2'b10;
+    `TEST(sra);
+      funct3 <= 3'b101;
+      funct7 <= 7'b0100000;
+      alu_op <= 2'b10;
 
-    #(CLK_PERIOD)
+      #(CLK_PERIOD)
 
-    `ASSERT_EQ(4'b1101, alu_ctrl);
+      `ASSERT_EQ(4'b1101, alu_ctrl);
+    `ENDTEST;
+  `ENDTESTARRAY;
 
-    `FINISH_TEST();
-  end
-
-endmodule // test
+endmodule // tb_alu_controller
 
 
