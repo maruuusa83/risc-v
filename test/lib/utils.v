@@ -34,8 +34,8 @@
 `define ENDTEST
 
 `define ENDTESTARRAY \
+  $display("[ TEST ] PASSED\t%s\t%t", __TEST_ARY_NAME__, $time); \
   $display("[ TEST ] %4d tests passed in %s", __TEST_COUNT__, __TEST_ARY_NAME__); \
-  $display("[ TEST ] PASSED %s %t", __TEST_ARY_NAME__, $time); \
   $finish(); \
   end \
   reg __endtestarray
