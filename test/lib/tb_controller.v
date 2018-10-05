@@ -33,7 +33,7 @@ module tb_controller();
     #(CLK_PERIOD)
 
     `TEST(R_type);
-      opcode <= 7'b0110011;
+      opcode <= OP;
 
       #(CLK_PERIOD)
       

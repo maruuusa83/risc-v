@@ -4,6 +4,8 @@
 // https://github.com/maruuusa83/risc-v/blob/master/LICENSE
 //
 
+`include "lib/utils.v"
+
 module CONTROLLER
 #(
   parameter REG_DATA_WIDTH = 32
@@ -21,7 +23,7 @@ module CONTROLLER
   always @(posedge clk or negedge nreset) begin
     if (nreset != 1'b0) begin
       case (opcode)
-        7'b0110011: begin
+        OP: begin
 	  alu_op <= 2'b10;
 	end
       endcase
