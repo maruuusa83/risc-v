@@ -4,7 +4,7 @@
 # https://github.com/maruuusa83/risc-v/blob/master/LICENSE
 #
 
-TEST_NAME=tb_riscv.v lib/tb_gpregs.v lib/tb_alu.v lib/tb_alu_controller.v
+TEST_NAME=tb_riscv.v lib/tb_gpregs.v lib/tb_alu.v lib/tb_alu_controller.v lib/tb_controller.v
 
 TEST_DIR=$(PROJECT_ROOT)/test
 TEST_EXECUTABLE=$(TEST_NAME:.v=.o)
