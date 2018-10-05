@@ -11,7 +11,8 @@ BIN_DIR=$(PROJECT_ROOT)/bin
 TEST_DIR=$(PROJECT_ROOT)/test
 
 SRC_DIR=$(PROJECT_ROOT)/src
-SRC=riscv.v lib/gpregs.v lib/alu.v lib/alu_controller.v lib/controller.v
+SRC_DIR_LST=$(shell find $(SRC_DIR) -type d)
+SRC=$(foreach dir, $(SRC_DIR_LST), $(wildcard $(dir)/*.v))
 
 export PROJECT_ROOT
 export BIN_DIR
