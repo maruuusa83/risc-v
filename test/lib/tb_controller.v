@@ -20,6 +20,8 @@ module tb_controller();
   reg [6:0] opcode;
   wire [1:0] alu_op;
 
+  wire alu_src_a, alu_src_b;
+
   CONTROLLER controller (.*);
 
   always #(CLK_PERIOD/2) begin
@@ -33,7 +35,7 @@ module tb_controller();
     #(CLK_PERIOD)
 
     `TEST(R_type);
-      opcode <= 7'b0110011;
+      opcode <= OP;
 
       #(CLK_PERIOD)
       

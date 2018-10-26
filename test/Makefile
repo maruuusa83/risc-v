@@ -13,22 +13,25 @@ TEST_EXECUTABLE=$(TEST_SRC:.v=.o)
 IV=iverilog
 IVFLAGS=-g2005-sv -DDEBUG
 
+UTILITY_SRC=$(SRC_DIR)/lib/utils.v $(TEST_DIR)/lib/utils.v
+
 .SUFFIXES: .o .v
 
 .PHONY: all
 all: $(TEST_EXECUTABLE)
 
 .PHONY: run
-run: $(TEST_EXECUTABLE)
+run: all
 	$(foreach e, $(TEST_EXECUTABLE), $(e);)
 
 .v.o:
 	$(IV) $(IVFLAGS) -o $@  $< $(SRC)
 
-tb_riscv.o: $(SRC)
-lib/tb_gpregs.o: $(SRC_DIR)/lib/gpregs.v
-lib/tb_alu.o: $(SRC_DIR)/lib/alu.v
-lib/tb_controller.o: $(SRC_DIR)/lib/controller.v
+$(TEST_DIR)/tb_riscv.o: $(UTILITY_SRC) $(SRC)
+$(TEST_DIR)/lib/tb_gpregs.o: $(UTILITY_SRC) $(SRC_DIR)/lib/gpregs.v
+$(TEST_DIR)/lib/tb_alu.o: $(UTILITY_SRC) $(SRC_DIR)/lib/alu.v
+$(TEST_DIR)/lib/tb_controller.o: $(UTILITY_SRC) $(SRC_DIR)/lib/controller.v
+
 
 .PHONY: clean
 clean:
