@@ -20,6 +20,8 @@ module tb_controller();
   reg [6:0] opcode;
   wire [1:0] alu_op;
 
+  wire alu_src_a, alu_src_b;
+
   CONTROLLER controller (.*);
 
   always #(CLK_PERIOD/2) begin
